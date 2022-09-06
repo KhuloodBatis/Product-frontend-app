@@ -61,10 +61,10 @@ function ShowProduct() {
                                                 <td>{product.title}</td>
                                                 <td>{product.description}</td>
                                                 <td>
-                                                    <img width="100px" src={`http://127.0.0.1:8000/storage/product/image/${ product.image }`} />
+                                                    <img width="100px" height="70px" src={`http://127.0.0.1:8000/storage/product/image/${ product.image }`} />
                                                 </td>
                                                 <td>
-                                                    <Link className="btn btn-success mb-2 " to={`/product/edit/${ product.id }`}>Edit</Link>
+                                                    <Link className="btn btn-success " to={`/product/edit/${ product.id }`}>Edit</Link>
                                                 </td>
                                                 <td>
                                                     <button type="submit" className="btn btn-danger " onClick={() => deleteProduct(product.id)}>Delete</button>
