@@ -4,27 +4,22 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import EditProduct from "./components/editProduct"
 import CreateProduct from "./components/createProduct"
 import ShowProduct from "./components/showProduct"
+import { FaShoppingCart } from "react-icons/fa"
+
 
 
 
 function App() {
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to={"/"}>Product</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-              <li className="nav-item">
+      <nav className="flex h-20 px-5 bg-slate-300 border-gray-400 item-center">
+        <div className="mt-8">
+          <Link className="text-center text-2xl text-black font-bold pt-10 no-underline" to={"/"}>Product</Link>
+        </div>
 
-              </li>
-
-            </ul>
-          </div>
+        <div className=' text-2xl text-black font-bold pt-10 translate-x-[200px] md:translate-x-[600px] lg:translate-x-[800px]  ' >
+          <FaShoppingCart />
         </div>
       </nav>
       <Routes>

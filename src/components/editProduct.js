@@ -60,6 +60,7 @@ function EditProduct() {
     return (
 
         <div className="container">
+
             <div className=" row justify-content-center">
                 <div className="col-12 col-sm-12 col-md-12">
                     <div className="card">
@@ -73,7 +74,7 @@ function EditProduct() {
                                         <input type="text" className="form-control" vlaue={title} onChange={(e) => { setTitle(e.target.value) }} />
                                     </div>
                                     <div className="mb-3">
-                                        <label className="form-label">Example textarea</label>
+                                        <label className="form-label">Description</label>
                                         <textarea className="form-control" rows="3" vlaue={description} onChange={(e) => { setDescription(e.target.value) }}></textarea>
                                     </div>
                                     <div className="mb-3">

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { AiOutlinePlusSquare } from "react-icons/ai"
+import { BsPencilSquare } from "react-icons/bs"
+import { MdDeleteOutline } from "react-icons/md"
 
 
 function ShowProduct() {
-
+    const cart = [];
     const [products, setProducts] = useState([])
 
 
@@ -15,7 +18,7 @@ function ShowProduct() {
     const fetchProducts = async () => {
         await axios.get(`http://127.0.0.1:8000/api/products`)
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 setProducts(response.data.data)
             })
     }
@@ -23,12 +26,24 @@ function ShowProduct() {
     const deleteProduct = async (id) => {
         await axios.delete(`http://127.0.0.1:8000/api/products/${ id }`)
             .then(({ data }) => {
-                console.log(data.message);
+                // console.log(data.message);
                 fetchProducts();
             }).catch(({ resp: { data } }) => {
                 console.log(data.message);
             })
     }
+
+    // const addToCart = async (id) => {
+    //     console.log(id)
+    //     await axios.get(`http://127.0.0.1:8000/api/products/${ id }`)
+    //         .then(({ data }) => {
+    //             fetchProducts();
+    //             cart.push(data)
+    //             console.log(cart);
+    //         }).catch(({ response: { data } }) => {
+    //             console.log(data.message);
+    //         })
+    // }
 
 
     // console.log(products);
@@ -36,55 +51,61 @@ function ShowProduct() {
 
     return (
 
-        <div className="container">
-            <div className=" row ">
-                <div className="col-12 ">
-                    <Link className="btn btn-primary mb-2 float-end" to={"/product/create"}>Create</Link>
-                    <div className="col-12">
+        <div className=" flex flex-col  ">
 
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    products.length > 0 && (
-                                        products.map((product) => (
-                                            <tr key={product.id}>
-                                                <td>{product.title}</td>
-                                                <td>{product.description}</td>
-                                                <td>
-                                                    <img width="100px" height="70px" src={`http://127.0.0.1:8000/storage/product/image/${ product.image }`} />
-                                                </td>
-                                                <td>
-                                                    <Link className="btn btn-success " to={`/product/edit/${ product.id }`}>Edit</Link>
-                                                </td>
-                                                <td>
-                                                    <button type="submit" className="btn btn-danger " onClick={() => deleteProduct(product.id)}>Delete</button>
-                                                </td>
-
-                                            </tr>
-                                        ))
-                                    )
-                                }
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+            <div className="flex justify-end mt-3 mr-2 ">
+                <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 no-underline" to={"/product/create"}>Create</Link>
             </div>
-        </div>
+            <div className="flex border border-gray-500 bg-white  ml-20 mr-20 mt-10 item-center relative mb-20">
+                <table className="  table-auto md:table-fixed ml-10  mr-10 mt-10  divide-y w-[980px] ">
+                    <thead>
+                        <tr  >
+                            <th className="mb-10 " >Title</th>
+                            <th >Description</th>
+                            <th className="pl-14" >Image</th>
+                            <th className="pl-24" >Edit</th>
+                            <th className="pl-20" >Delete</th>
+                            {/* <th >Add</th> */}
+
+
+                        </tr>
+                    </thead>
+                    <tbody className=" divide-y">
+                        {
+                            products.length > 0 && (
+                                products.map((product) => (
+                                    <tr key={product.id}>
+                                        <td>{product.title}</td>
+                                        <td>{product.description}</td>
+                                        <td className="pl-10">
+                                            <img className="h-[90px] w-[90px] mt-2 mb-2" src={`http://127.0.0.1:8000/storage/product/image/${ product.image }`} />
+                                        </td>
+                                        <td className="pl-24">
+                                            <Link className="   text-black text-xl " to={`/product/edit/${ product.id }`}><BsPencilSquare /></Link>
+                                        </td>
+                                        <td className="pl-24  ">
+                                            <button type="submit" className="text-xl   " onClick={() => deleteProduct(product.id)}><MdDeleteOutline /></button>
+                                        </td>
+                                        {/* <td>
+                                            <button type="submit" className=" text-black text-xl " onClick={() => addToCart(product.id)} ><AiOutlinePlusSquare /></button>
+                                        </td> */}
+
+
+
+
+                                    </tr>
+                                ))
+                            )
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div >
 
     )
 
 }
 
 export default ShowProduct;
+
